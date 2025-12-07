@@ -36,7 +36,7 @@ export const userLogin = async (req, res) => {
     });
   } catch (error) {
     console.log("Login Error:", error);
-    res.status(400).json({
+   return res.status(400).json({
       success: false,
       message: `Internal Server Error ` || error,
     });
@@ -88,13 +88,13 @@ export const userRegister = async (req, res) => {
     res.status(201).json({
       user,
       success: true,
-      message: "User Register Successfully",
       token,
+      message: "User Register Successfully",
     });
   } catch (error) {
-    res.status(400).json({
+  return  res.status(400).json({
       success: false,
-      message: `${error || "Internal Server Error"}`,
+      message: `Registration Error`,
     });
   }
 };

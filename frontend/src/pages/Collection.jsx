@@ -3,6 +3,7 @@ import { shopContext } from "../context/ShopContext";
 import { assets } from "../assets/frontend_assets/assets";
 import Title from "../components/Title";
 import ProductItem from "../components/ProductItem";
+
 const Collection = () => {
   const { products,search,showSearch } = useContext(shopContext);
   const [showFilter, setShowFilter] = useState(false);
@@ -11,7 +12,7 @@ const Collection = () => {
   useEffect(() => {
     setFilterProduct(products);
     //
-  }, []);
+  }, [products]);
   const [category, setCategory] = useState([]);
   const [subCategory, setsubCategory] = useState([]);
   const toggleCategory = (e) => {
@@ -50,7 +51,7 @@ const Collection = () => {
   };
   useEffect(() => {
     applayFillter();
-  }, [category, subCategory,search,showSearch]);
+  }, [category, subCategory,search,showSearch,products]);
 
   const sortProduct = () => {
     const copyFPro = filterProducts.slice();
@@ -189,7 +190,7 @@ const Collection = () => {
               price={item.price}
               key={index}
             />
-          ))}
+          ))} 
         </div>
       </div>
     </div>

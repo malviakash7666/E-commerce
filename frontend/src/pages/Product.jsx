@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { shopContext } from "../context/ShopContext";
-import { assets } from "../assets/frontend_assets/assets";
+import { assets, product } from "../assets/frontend_assets/assets";
 import RelatedProduct from "../components/RelatedProduct";
 
 const Product = () => {
@@ -11,7 +11,13 @@ const Product = () => {
   const [image, setImage] = useState("");
   const [size,setSize] = useState('');
   const fetchProduct = () => {
-    products.map((item) => {
+   products.length > 0 ? products.map((item) => {
+      if (item._id === productId) {
+        setProductData(item);
+        setImage(item.image[0]);
+        return null;
+      }
+    }): product.map((item) => {
       if (item._id === productId) {
         setProductData(item);
         setImage(item.image[0]);
@@ -62,7 +68,7 @@ const Product = () => {
             <div className="flex gap-2 ">
               {
                 productData.sizes.map((item,index)=>(
-                  <button onClick={()=>setSize(item)} className={`border py-2 px-4 bg-gray-100 ${size === item ? "border-orange-500" : ""}`} key={index}>{item}</button>
+                  <button onClick={()=>setSize(item)} className={`border py-2 px-4 bg-gray-100 ${size === item ? "border-orange-500" : ""} cursor-pointer`} key={index}>{item}</button>
 
                 ))
               }

@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 
 
 const userModel = new mongoose.Schema({
@@ -16,10 +16,10 @@ const userModel = new mongoose.Schema({
         type:String,
        required:true   
     },
-    cardData:{
+    cartData:{
         type:Object,
         default:{}
     }
-},{minimize:false})
+},{minimize:false}) // emty object {} bhi store hoga issai
 
-export const User = mongoose.model('user',userModel)
+export const User =mongoose.models.user ||  mongoose.model('user',userModel)

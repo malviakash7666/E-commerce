@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import {backendUrl} from '../App'
+
 import axios from 'axios'
 import { toast } from 'react-toastify'
 function Login({setToken}) {
-  const [email, setemail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setemail] = useState("admin@gmail.com")
+  const [password, setPassword] = useState("12345678")
   const onsubmitHandler = async (e) =>{
 
     try {

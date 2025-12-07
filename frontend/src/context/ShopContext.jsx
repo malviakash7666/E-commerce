@@ -1,15 +1,17 @@
 import { createContext, useEffect, useState } from "react";
-import { products } from "../assets/frontend_assets/assets";
+
 import React from "react";
 import { toast } from "react-toastify";
 export const shopContext = createContext();
 import {useNavigate} from 'react-router-dom'
+import axios from "axios"
 
 const ShopContxtProvider = (props) => {
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
   const [cardItems, setCardItems] = useState({});
-
+  const [products,setProducts] = useState([])
+  const [token,setToken] = useState('')
   const navigate = useNavigate()
 
   const addToCard = async (itemId, size) => {
@@ -17,18 +19,28 @@ const ShopContxtProvider = (props) => {
       toast.error("Please select a size");
       return;
     }
-    let cardData = structuredClone(cardItems);
-    if (cardData[itemId]) {
-      if (cardData[itemId][size]) {
-        cardData[itemId][size] += 1;
+    let cartData = structuredClone(cardItems);
+    if (cartData[itemId]) {
+      if (cartData[itemId][size]) {
+        cartData[itemId][size] += 1;
       } else {
-        cardData[itemId][size] = 1;
+        cartData[itemId][size] = 1;
       }
     } else {
-      cardData[itemId] = {};
-      cardData[itemId][size] = 1;
+      cartData[itemId] = {};
+      cartData[itemId][size] = 1;
     }
-    setCardItems(cardData);
+    setCardItems(cartData);
+    if(token){
+      try {
+        await axios.post('http://localhost:4000/api/cart/add',{itemId,size},{headers:{token}})
+       
+       
+      } catch (error) {
+       console.log(error)
+        toast.error(error.response.data.message)
+      }
+    }
   };
 
 
@@ -40,23 +52,32 @@ const ShopContxtProvider = (props) => {
           if (cardItems[items][item] > 0) {
             count += cardItems[items][item];
           }
-        } catch (error) {}
+        } catch (error) {
+          console.log("Error:",error)
+        }
       }
     }
     return count;
   };
 
-  const updateQuntity = (itemId,size,quntity) => {
-    const cardData = structuredClone(cardItems)
-    cardData[itemId][size] = quntity
-    setCardItems(cardData)
+  const updatequantity = async (itemId,size,quantity) => {
+    const cartData = structuredClone(cardItems)
+    cartData[itemId][size] = quantity
+    setCardItems(cartData)
+    if(token){
+      try {
+        await axios.post("http://localhost:4000/api/cart/update",{itemId,size,quantity},{headers:{token}})
+      } catch (error) {
+        toast.error(error.response.data.message)
+      }
+    }
   }
 
 
 const getCartAmount = () =>{
   let totalAmount = 0;
   for(const items in cardItems){
-    let itemInfo = products.find((product)=>product._id === items)
+    let itemInfo =products.find((pro)=>pro._id === items)
     for(const item in cardItems[items]){
       try {
         if(cardItems[items][item] > 0){
@@ -64,16 +85,60 @@ const getCartAmount = () =>{
 
         }
       } catch (error) {
-        
+        console.log("error:",error)
       }
     }
   }
   return totalAmount
 }
 
+const getUserCard = async (token) => {
+
+  try {
+    const response = await axios.get('http://localhost:4000/api/cart/get',{headers:{
+      token:token
+    }})
+    console.log(response)
+    if(response.data.success){
+      setCardItems(response.data.cartData)
+    }
+  } catch (error) {
+    toast.error(error.response.data.message)
+  }
+  
+}
+
 
   const currency = "$";
   const delivery_fee = 10;
+
+
+  const getAllProduct = async () => {
+    try {
+      const response = await axios.get("http://localhost:4000/api/product/list");
+      console.log(response)
+      if(response.data.success){
+        setProducts(response.data.product);
+      }else{
+        toast.error(response.data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+    
+  }
+useEffect(()=>{
+  
+  getAllProduct()},[])
+
+useEffect(()=>{
+  if(!token && localStorage.getItem('token')){
+    setToken(localStorage.getItem('token'))
+    getUserCard(localStorage.getItem('token'))
+    console.log(localStorage.getItem('token'))
+  }
+},[token])
+
   const value = {
     products,
     currency,
@@ -85,9 +150,12 @@ const getCartAmount = () =>{
     cardItems,
     addToCard,
     getCardCount,
-    updateQuntity,
+    updatequantity,
     getCartAmount,
-    navigate
+    navigate,
+    token,
+    setToken,
+    setCardItems
   };
   return (
     <shopContext.Provider value={value}>{props.children}</shopContext.Provider>

@@ -3,18 +3,20 @@ import { productModel } from "../models/productModel.js";
 // function for add Product
 export const addProduct = async (req, res) => {
   try {
+    console.log(req.body)
+    console.log(req.files)
     const {
       name,
       description,
       price,
       category,
-      subcategory,
+      subCategory,
       sizes,
       bestSeller,
     } = req.body;
     if (
-      (!name || !description || !price,
-      !category || !subcategory || !sizes || !bestSeller)
+      (!name || !description || !price ||
+      !category || !subCategory || !sizes || !bestSeller)
     ) {
       res
         .status(400)
@@ -41,17 +43,22 @@ export const addProduct = async (req, res) => {
       description,
       price:Number(price),
       category,
-      subcategory,
+      subCategory,
       sizes:JSON.parse(sizes),
       bestSeller:Boolean(bestSeller === "true" ? true : false),
       image:imageUrl,
       date:Date.now()
     });
+    console.log(product)
 
-    res.status(200).json({success:true,message:"Prosuct add successfully",product})
-    console.log(imageUrl);
+    res.status(200).json({success:true,message:"Product add successfully",product})
+
   } catch (error) {
     console.log(error);
+    res.json({
+      success:false,
+      message:error.message
+    })
   }
 };
 
@@ -64,29 +71,42 @@ export const listingProduct = async (req, res) => {
       product
     })
   } catch (error) {
-    console.log("Listining Product error:",error)
-    res.status(400).json({
+   console.log(error);
+    res.json({
       success:false,
-      message:"Internal Server Error"
+      message:error.message
     })
   }
 };
 
 // function for remove Product
 export const removeProduct = async (req, res) => {
-  const id = await productModel.findOneAndDelete(req.body.id)
+  const {id} = req.body;
   if(!id){
-     res.status(404).json({
-    success:true,
-    message:"Product already Remove "
+    res.status(404).json({
+      success:false,
+      message:"Product already Remove "
   })
-  }
+}
+const deletedProduct = await productModel.findOneAndDelete({ _id: id });
+
+    if (!deletedProduct) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found",
+      });
+    }
   res.status(200).json({
     success:true,
     message:"Product Remove Successfully"
   })
   try {
-  } catch (error) {}
+  } catch (error) { console.log(error);
+    res.json({
+      success:false,
+      message:error.message
+    })
+  }
 };
 
 // function for single Product
@@ -105,5 +125,12 @@ export const singleProduct = async (req, res) => {
     product
   })
   try {
-  } catch (error) {}
+  } catch (error) {
+     console.log(error);
+    res.json({
+      success:false,
+      message:error.message
+    })
+  }
+
 };

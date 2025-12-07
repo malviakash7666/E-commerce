@@ -16,8 +16,8 @@ const Contact = () => {
     <p className='text-gray-500'>54709 Williams Station <br /> Suited 350,Washingtan, USA </p>
     <p className='text-gray-500'>Tel: (91)  1800-30000-123 <br /> email:example@gmail.com </p>
     <p className='font-semibold text-xl text-gray-600 '>Careers at Forever</p>
-    <p className='text-gray-600'>Learn more about our teams and job opning </p>
-    <button className="border border-black py-4 px-8 text-sm hover:bg-black hover:text-white transition-all duration-500">Explore Jobs</button>
+    <p className='text-gray-600 '>Learn more about our teams and job opning </p>
+    <button className="border border-black py-4 px-8 text-sm hover:bg-black hover:text-white transition-all duration-500 cursor-pointer">Explore Jobs</button>
   </div>
 
 

@@ -21,7 +21,7 @@ const productSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  subcategory: {
+  subCategory: {
     type: String,
     required: true,
   },
@@ -38,4 +38,4 @@ const productSchema = new mongoose.Schema({
   },
 });
 
-export const productModel = mongoose.model("product", productSchema);
+export const productModel = mongoose.models.product ||  mongoose.model("product", productSchema);

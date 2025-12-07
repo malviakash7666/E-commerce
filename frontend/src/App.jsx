@@ -13,9 +13,10 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Search from './components/Search'
 import { ToastContainer} from 'react-toastify';
+import Verify from './pages/Verify'
 const App = () => {
   return (
-    <div className='px-10 sm:px[10vw] lg:px[9vw]'>
+    <div className='px-10 sm:px[5vw] md:px-[7vw] lg:px[9vw]'>
       <ToastContainer position='top-right' />
         <Navbar />
         <Search />
@@ -29,6 +30,7 @@ const App = () => {
         <Route path='/login' element={<Login />} />
         <Route path='/place-order' element={<PlaceOrder />} />
         <Route path='/orders' element={<Orders />} />
+        <Route path='/verify' element={<Verify />} />
       </Routes>
       <Footer />
     </div>
