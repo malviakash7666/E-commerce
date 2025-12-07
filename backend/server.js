@@ -13,7 +13,7 @@ import express from 'express'
 const app = express()
 const port = process.env.PORT || 4000
 app.use(cors({
-    origin:[process.env.ADMIN_URL,process.env.FRONTEND_URL],
+    origin:[process.env.ADMIN_URL ,process.env.FRONTEND_URL || "https://e-commerce-saxl.vercel.app"],
     methods:['POST','GET','PUT','DELETE'],
     credentials:true
 }))
