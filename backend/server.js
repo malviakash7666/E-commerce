@@ -22,6 +22,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}))
 
 // api endpoints 
+app.get("/", (req, res) => {
+  res.send("Backend is running...");
+});
 app.use('/api/user',userRoute)
 app.use('/api/product',productRoute)
 app.use('/api/cart',cartRoute)
