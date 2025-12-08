@@ -95,7 +95,7 @@ const Cart = () => {
           <CartTotal />
           <div className="w-full text-end">
             <button
-              onClick={() =>{cartItems.length > 0  && navigate("/place-order")}}
+              onClick={() =>{cartItems && navigate("/place-order")}}
               className="bg-black text-white text-sm my-8 px-8 py-3"
             >
               PROCESSED TO CHECKOUT
