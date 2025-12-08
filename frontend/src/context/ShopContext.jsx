@@ -98,7 +98,7 @@ const getUserCard = async (token) => {
   try {
     const response = await axios.get(`${backendUrl}/api/cart/get`,{headers:{
       token:token
-    }})
+    }}) 
     console.log(response)
     if(response.data.success){
       setcartItems(response.data.cartData)

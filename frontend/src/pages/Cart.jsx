@@ -39,7 +39,7 @@ const Cart = () => {
           );
           
  
-  { productData.length > 0    ?     (
+  { productData?     (
         
             <div
               key={index}
