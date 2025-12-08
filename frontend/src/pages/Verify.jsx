@@ -3,8 +3,8 @@ import {shopContext} from "../context/ShopContext"
 import {  useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 const Verify = () => {
-  const {token,navigate,setcartItems} = useContext(shopContext);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const {token,navigate,setcartItems,backendUrl} = useContext(shopContext);
+  const [searchParams] = useSearchParams();
 
   const success = searchParams.get('success');
   const orderid = searchParams.get('orderId');
@@ -15,8 +15,8 @@ const Verify = () => {
         return null;
       }
 
-      const response = await axios.post('import.meta.env.BASE_BACKEND_URL/api/order/verifyStrip',{success,orderid},{headers:{token : token}});
-      console.log(response)
+      const response = await axios.post(`${backendUrl}/api/order/verifyStrip`,{success,orderid},{headers:{token : token}});
+ 
       if(response.data.success){
         setcartItems({});
         navigate("/orders")
