@@ -14,7 +14,7 @@ const Login = () => {
     try {
       if (currentState === "Sign Up") {
         const response = await axios.post(
-          "http://localhost:4000/api/user/register",
+          "import.meta.env.BASE_BACKEND_URL/api/user/register",
           { name, email, password }
         );
         if (response.data.success) {
@@ -26,7 +26,7 @@ const Login = () => {
         }
       } else {
         const response = await axios.post(
-          "http://localhost:4000/api/user/login",
+          "import.meta.env.BASE_BACKEND_URL/api/user/login",
           { email, password }
         );
         if (response.data.success) {

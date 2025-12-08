@@ -15,7 +15,7 @@ const Verify = () => {
         return null;
       }
 
-      const response = await axios.post('http://localhost:4000/api/order/verifyStrip',{success,orderid},{headers:{token : token}});
+      const response = await axios.post('import.meta.env.BASE_BACKEND_URL/api/order/verifyStrip',{success,orderid},{headers:{token : token}});
       console.log(response)
       if(response.data.success){
         setCardItems({});

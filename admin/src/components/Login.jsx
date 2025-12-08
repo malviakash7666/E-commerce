@@ -9,7 +9,7 @@ function Login({setToken}) {
 
     try {
       e.preventDefault()
-      const response = await axios.post('http://localhost:4000/api/user/admin',{email,password})
+      const response = await axios.post('import.meta.env.BASE_BACKEND_URL/api/user/admin',{email,password})
       if(response.data.success){
         setToken(response.data.token)
         toast.success(response.data.message)

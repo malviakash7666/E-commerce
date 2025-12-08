@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { assets } from "../assets/assets";
-
+const backendUrl = import.meta.env.BASE_BACKEND_URL;
 function Orders({ token }) {
   const [orders, setOrders] = useState([]);
 
@@ -13,8 +13,7 @@ function Orders({ token }) {
       return null;
     }
     try {
-      const response = await axios.post(
-        "http://localhost:4000/api/order/list",
+      const response = await axios.post(backendUrl+"/api/order/list",
         {},
         { headers: { token } }
       );
@@ -34,7 +33,7 @@ function Orders({ token }) {
 
   const statusUpdate = async (event,orderId) => {
     try {
-      const response = await axios.post("http://localhost:4000/api/order/status",{orderId,status:event.target.value} ,{headers:{token}})
+      const response = await axios.post(backendUrl+"/api/order/status",{orderId,status:event.target.value} ,{headers:{token}})
       console.log(response)
       if(response.data.success){
        await featchOrders()

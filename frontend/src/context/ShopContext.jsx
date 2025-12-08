@@ -5,6 +5,7 @@ import { toast } from "react-toastify";
 export const shopContext = createContext();
 import {useNavigate} from 'react-router-dom'
 import axios from "axios"
+const backendUrl = import.meta.env.process.env.BASE_BACKEND_URL
 
 const ShopContxtProvider = (props) => {
   const [search, setSearch] = useState("");
@@ -33,7 +34,7 @@ const ShopContxtProvider = (props) => {
     setCardItems(cartData);
     if(token){
       try {
-        await axios.post('http://localhost:4000/api/cart/add',{itemId,size},{headers:{token}})
+        await axios.post(backendUrl + '/api/cart/add',{itemId,size},{headers:{token}})
        
        
       } catch (error) {
@@ -66,7 +67,7 @@ const ShopContxtProvider = (props) => {
     setCardItems(cartData)
     if(token){
       try {
-        await axios.post("http://localhost:4000/api/cart/update",{itemId,size,quantity},{headers:{token}})
+        await axios.post(backendUrl + "/api/cart/update",{itemId,size,quantity},{headers:{token}})
       } catch (error) {
         toast.error(error.response.data.message)
       }
@@ -95,7 +96,7 @@ const getCartAmount = () =>{
 const getUserCard = async (token) => {
 
   try {
-    const response = await axios.get('http://localhost:4000/api/cart/get',{headers:{
+    const response = await axios.get(backendUrl + '/api/cart/get',{headers:{
       token:token
     }})
     console.log(response)
@@ -115,7 +116,7 @@ const getUserCard = async (token) => {
 
   const getAllProduct = async () => {
     try {
-      const response = await axios.get("http://localhost:4000/api/product/list");
+      const response = await axios.get(backendUrl + "/api/product/list");
       console.log(response)
       if(response.data.success){
         setProducts(response.data.product);
@@ -155,7 +156,8 @@ useEffect(()=>{
     navigate,
     token,
     setToken,
-    setCardItems
+    setCardItems,
+    backendUrl
   };
   return (
     <shopContext.Provider value={value}>{props.children}</shopContext.Provider>

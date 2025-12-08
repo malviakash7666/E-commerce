@@ -16,7 +16,7 @@ const Orders = () => {
     if(!token){
       return null;
     }
-    const response = await axios.post('http://localhost:4000/api/order/userorders',{},{headers:{ token:token}})
+    const response = await axios.post('import.meta.env.BASE_BACKEND_URL/api/order/userorders',{},{headers:{ token:token}})
  console.log(response)
     setOrderData(response.data.orders)
    } catch (error) {
