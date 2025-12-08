@@ -38,8 +38,9 @@ const Cart = () => {
             (product) => product._id === item._id
           );
           
+          if(!productData){<h1>No Cart Items was found</h1>}
  
-  { productData    ?     (
+  return(
         
             <div
               key={index}
@@ -84,12 +85,10 @@ const Cart = () => {
                 alt=""
               />
             </div>
-          ) : (
-<h1>No Cart Items was found</h1>
-          )
-        }
+          
+        )}
 
-        })} 
+        )} 
       </div>
       <div className="flex justify-end my-20">
         <div className="w-full sm:w-[450px]">
