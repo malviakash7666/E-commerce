@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
 import axios from 'axios'
 import { toast } from 'react-toastify'
 function Login({setToken}) {
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
   const [email, setemail] = useState("admin@gmail.com")
   const [password, setPassword] = useState("12345678")
   const onsubmitHandler = async (e) =>{
