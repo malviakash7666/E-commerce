@@ -5,11 +5,11 @@ import { shopContext } from '../context/ShopContext'
 
 const Navbar = () => {
     const [visible, setVisible] = useState(false)
-    const {setToken,setShowSearch,getCardCount,setCardItems,navigate,token} = useContext(shopContext)
+    const {setToken,setShowSearch,getCardCount,setcartItems,navigate,token} = useContext(shopContext)
     const logout = ()=>{
         localStorage.removeItem('token')
         setToken('')
-        setCardItems({})
+        setcartItems({})
         navigate("/login")
 
     }

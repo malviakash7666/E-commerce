@@ -11,8 +11,8 @@ const PlaceOrder = () => {
   const {
     navigate,
     token,
-    cardItems,
-    setCardItems,
+    cartItems,
+    setcartItems,
     getCartAmount,
     delivery_fee,
     products,
@@ -49,7 +49,7 @@ const PlaceOrder = () => {
            const {data} = await axios.post("import.meta.env.BASE_BACKEND_URL/api/order/verifyRazorpay",response,{headers:{token}});
            if(data.success){
             navigate("/orders");
-            setCardItems({})
+            setcartItems({})
            }
  } catch (error) {
   console.log(error)
@@ -67,13 +67,13 @@ const PlaceOrder = () => {
    try {
      let orderItems = []
 
-    for(const items in cardItems){
-  for(const item in cardItems[items]){
-      if(cardItems[items][item] > 0){
+    for(const items in cartItems){
+  for(const item in cartItems[items]){
+      if(cartItems[items][item] > 0){
         const itemInfo = structuredClone(products.find(product=>product._id === items))
         if(itemInfo){
           itemInfo.size = item;
-          itemInfo.quantity = cardItems[items][item]
+          itemInfo.quantity = cartItems[items][item]
           orderItems.push(itemInfo)
         }
       }
@@ -90,7 +90,7 @@ const PlaceOrder = () => {
 
 console.log(response)
   if(response.data.success){
-    setCardItems({})
+    setcartItems({})
     navigate("/orders")
   } else{
     toast.error(response.data.message)

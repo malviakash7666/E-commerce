@@ -10,7 +10,7 @@ const backendUrl = import.meta.env.VITE_BACKEND_URL;
 const ShopContxtProvider = (props) => {
   const [search, setSearch] = useState("");
   const [showSearch, setShowSearch] = useState(false);
-  const [cardItems, setCardItems] = useState({});
+  const [cartItems, setcartItems] = useState({});
   const [products,setProducts] = useState([])
   const [token,setToken] = useState('')
   const navigate = useNavigate()
@@ -20,7 +20,7 @@ const ShopContxtProvider = (props) => {
       toast.error("Please select a size");
       return;
     }
-    let cartData = structuredClone(cardItems);
+    let cartData = structuredClone(cartItems);
     if (cartData[itemId]) {
       if (cartData[itemId][size]) {
         cartData[itemId][size] += 1;
@@ -31,7 +31,7 @@ const ShopContxtProvider = (props) => {
       cartData[itemId] = {};
       cartData[itemId][size] = 1;
     }
-    setCardItems(cartData);
+    setcartItems(cartData);
     if(token){
       try {
         await axios.post(`${backendUrl}/api/cart/add`,{itemId,size},{headers:{token}})
@@ -47,11 +47,11 @@ const ShopContxtProvider = (props) => {
 
   const getCardCount = () => {
     let count = 0;
-    for (let items in cardItems) {
-      for (const item in cardItems[items]) {
+    for (let items in cartItems) {
+      for (const item in cartItems[items]) {
         try {
-          if (cardItems[items][item] > 0) {
-            count += cardItems[items][item];
+          if (cartItems[items][item] > 0) {
+            count += cartItems[items][item];
           }
         } catch (error) {
           console.log("Error:",error)
@@ -62,9 +62,9 @@ const ShopContxtProvider = (props) => {
   };
 
   const updatequantity = async (itemId,size,quantity) => {
-    const cartData = structuredClone(cardItems)
+    const cartData = structuredClone(cartItems)
     cartData[itemId][size] = quantity
-    setCardItems(cartData)
+    setcartItems(cartData)
     if(token){
       try {
         await axios.post(`${backendUrl}/api/cart/update`,{itemId,size,quantity},{headers:{token}})
@@ -77,12 +77,12 @@ const ShopContxtProvider = (props) => {
 
 const getCartAmount = () =>{
   let totalAmount = 0;
-  for(const items in cardItems){
+  for(const items in cartItems){
     let itemInfo =products.find((pro)=>pro._id === items)
-    for(const item in cardItems[items]){
+    for(const item in cartItems[items]){
       try {
-        if(cardItems[items][item] > 0){
-          totalAmount += itemInfo.price * cardItems[items][item]
+        if(cartItems[items][item] > 0){
+          totalAmount += itemInfo.price * cartItems[items][item]
 
         }
       } catch (error) {
@@ -101,7 +101,7 @@ const getUserCard = async (token) => {
     }})
     console.log(response)
     if(response.data.success){
-      setCardItems(response.data.cartData)
+      setcartItems(response.data.cartData)
     }
   } catch (error) {
     toast.error(error.response.data.message)
@@ -148,7 +148,7 @@ useEffect(()=>{
     setSearch,
     showSearch,
     setShowSearch,
-    cardItems,
+    cartItems,
     addToCard,
     getCardCount,
     updatequantity,
@@ -156,7 +156,7 @@ useEffect(()=>{
     navigate,
     token,
     setToken,
-    setCardItems,
+    setcartItems,
     backendUrl
   };
   return (
