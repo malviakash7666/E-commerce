@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 export const shopContext = createContext();
 import {useNavigate} from 'react-router-dom'
 import axios from "axios"
-const backendUrl = import.meta.env.VITE_BACKEND_URL
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
 const ShopContxtProvider = (props) => {
   const [search, setSearch] = useState("");
@@ -116,7 +116,7 @@ const getUserCard = async (token) => {
 
   const getAllProduct = async () => {
     try {
-      const response = await axios.get(`${backendUrl}+/api/product/list`);
+      const response = await axios.get(`${backendUrl}/api/product/list`);
       console.log(response)
       if(response.data.success){
         setProducts(response.data.product);
