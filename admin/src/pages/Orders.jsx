@@ -4,7 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { useEffect } from "react";
 import { assets } from "../assets/assets";
-const backendUrl = import.meta.env.BASE_BACKEND_URL;
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 function Orders({ token }) {
   const [orders, setOrders] = useState([]);
 

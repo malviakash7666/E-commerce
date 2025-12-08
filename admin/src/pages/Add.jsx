@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { assets } from "../assets/assets";
 import axios from 'axios'
 import {toast} from 'react-toastify'
-const backendUrl = import.meta.env.BASE_BACKEND_URL;
+const backendUrl = import.meta.env.VITE_BACKEND_URL;
 function Add({token}) {
   const [image1, setImage1] = useState(false);
   const [image2, setImage2] = useState(false);
