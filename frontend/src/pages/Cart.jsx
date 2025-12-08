@@ -5,27 +5,27 @@ import { assets } from "../assets/frontend_assets/assets";
 import CartTotal from "../components/CartTotal";
 
 const Cart = () => {
-  const { products, currency, cartItems, updatequantity, navigate } =
+  const { products, currency, cardItems, updatequantity, navigate } =
     useContext(shopContext);
   const [cartData, setcartData] = useState([]);
 
   useEffect(() => {
     if (products.length > 0) {
       const tempData = [];
-      for (const items in cartItems) {
-        for (const item in cartItems[items]) {
-          if (cartItems[items][item] > 0) {
+      for (const items in cardItems) {
+        for (const item in cardItems[items]) {
+          if (cardItems[items][item] > 0) {
             tempData.push({
               _id: items,
               size: item,
-              quantity: cartItems[items][item],
+              quantity: cardItems[items][item],
             });
           }
         }
       }
       setcartData(tempData);
     }
-  }, [cartItems, products]);
+  }, [cardItems, products]);
   return (
     <div className="border-t pt-14">
       <div className="text-2xl mb-3">
@@ -39,7 +39,7 @@ const Cart = () => {
           );
           
  
-  { productData?     (
+  { productData.length > 0    ?     (
         
             <div
               key={index}
@@ -96,7 +96,7 @@ const Cart = () => {
           <CartTotal />
           <div className="w-full text-end">
             <button
-              onClick={() =>{cartItems.length > 0  && navigate("/place-order")}}
+              onClick={() =>{cardItems.length > 0  && navigate("/place-order")}}
               className="bg-black text-white text-sm my-8 px-8 py-3"
             >
               PROCESSED TO CHECKOUT
