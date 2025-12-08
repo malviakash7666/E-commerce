@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 export const shopContext = createContext();
 import {useNavigate} from 'react-router-dom'
 import axios from "axios"
-const backendUrl = import.meta.env.process.env.VITE_BACKEND_URL
+const backendUrl = import.meta.env.VITE_BACKEND_URL
 
 const ShopContxtProvider = (props) => {
   const [search, setSearch] = useState("");
