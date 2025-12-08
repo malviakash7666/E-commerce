@@ -32,7 +32,7 @@ const Cart = () => {
         <Title text1={"YOUR"} text2={"CART"} />
       </div>
       <div>
-        {
+        {cartData && 
         cartData.map((item, index) => {
           const productData = products.find(
             (product) => product._id === item._id
@@ -40,7 +40,7 @@ const Cart = () => {
           
           if(!productData){<h1>No Cart Items was found</h1>}
  
-  return(
+  return( productData &&
         
             <div
               key={index}
