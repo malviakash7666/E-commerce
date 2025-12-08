@@ -16,6 +16,7 @@ const PlaceOrder = () => {
     getCartAmount,
     delivery_fee,
     products,
+    backendUrl
   } = useContext(shopContext);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -46,7 +47,7 @@ const PlaceOrder = () => {
       receipt:order.receipt,
       handler:async (response) =>{
  try {
-           const {data} = await axios.post("import.meta.env.BASE_BACKEND_URL/api/order/verifyRazorpay",response,{headers:{token}});
+           const {data} = await axios.post(`${backendUrl}/api/order/verifyRazorpay`,response,{headers:{token}});
            if(data.success){
             navigate("/orders");
             setcartItems({})
@@ -86,7 +87,7 @@ const PlaceOrder = () => {
  }
  switch (method) {
    case "cod": 
-  { const response = await axios.post("import.meta.env.BASE_BACKEND_URL/api/order/place",orderData,{headers:{token}})
+  { const response = await axios.post(`${backendUrl}/api/order/place`,orderData,{headers:{token}})
 
 console.log(response)
   if(response.data.success){
@@ -99,7 +100,7 @@ console.log(response)
     break;
 
     case "stripe":
-    {  const stripeResponse = await axios.post("import.meta.env.BASE_BACKEND_URL/api/order/stripe",orderData,{headers:{token}})
+    {  const stripeResponse = await axios.post(`${backendUrl}/api/order/stripe`,orderData,{headers:{token}})
        
   if(stripeResponse.data.success){
  const { session_url} = stripeResponse.data
@@ -110,7 +111,7 @@ console.log(response)
   break;
 
   case "razorpay" : {
-  const response = await  axios.post("import.meta.env.BASE_BACKEND_URL/api/order/razorpay",orderData,{headers:{token}})
+  const response = await  axios.post(`${backendUrl}/api/order/razorpay`,orderData,{headers:{token}})
   if(response.data.success){
     initPay(response.data.order )
   }
