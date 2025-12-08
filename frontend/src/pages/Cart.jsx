@@ -10,7 +10,7 @@ const Cart = () => {
   const [cartData, setcartData] = useState([]);
 
   useEffect(() => {
-    if (products.length > 0) {
+    if (products) {
       const tempData = [];
       for (const items in cardItems) {
         for (const item in cardItems[items]) {
@@ -39,7 +39,7 @@ const Cart = () => {
           );
           
  
-  { productData.length > 0    ?     (
+  { productData    ?     (
         
             <div
               key={index}
