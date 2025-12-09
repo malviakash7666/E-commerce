@@ -53,7 +53,7 @@ const PlaceOrder = () => {
             setcartItems({})
            }
  } catch (error) {
-  console.log(error)
+
   toast.error(error.message)
  }
          
@@ -89,7 +89,7 @@ const PlaceOrder = () => {
    case "cod": 
   { const response = await axios.post(`${backendUrl}/api/order/place`,orderData,{headers:{token}})
 
-console.log(response)
+
   if(response.data.success){
     setcartItems({})
     navigate("/orders")

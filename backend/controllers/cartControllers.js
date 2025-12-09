@@ -5,7 +5,7 @@ export const addToCart = async (req,res) => {
     try {
         const {itemId,size} = req.body;
                const userId = req.userId;
-        console.log(userId)
+       
         const userData = await User.findById(userId)
         if(!userData){
             return res.json({
@@ -13,7 +13,7 @@ export const addToCart = async (req,res) => {
                 message:"User Not Found"
             })
         }
-         console.log(userData)
+
         let cartData =  userData.cartData || {}
 
 
@@ -33,7 +33,7 @@ export const addToCart = async (req,res) => {
             message:'Item add to Cart'
         })
     } catch (error) {
-        console.log("add cart error:",error)
+      
         return res.status(400).json({
             success:false,
             message:error.message
@@ -74,7 +74,7 @@ export const userCart = async (req,res) => {
     try {
          
         const userId = req.userId;
-        console.log("",userId)
+   
         const userData = await User.findById(userId);
         let cartData = await userData.cartData;
 

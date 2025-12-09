@@ -17,10 +17,10 @@ const Orders = () => {
       return null;
     }
     const response = await axios.post(`${backendUrl}/api/order/userorders`,{},{headers:{ token:token}})
- console.log(response)
+
     setOrderData(response.data.orders)
    } catch (error) {
-    console.log(error)
+
     toast.error(error.message)
    }
     
@@ -38,9 +38,9 @@ const Orders = () => {
       </div>
       <div >
         { 
-          orderData.map((item,index)=>{ 
+          orderData.reverse().map((item,index)=>{ 
             const product = item.items?.[0]
-            console.log(product)
+         
             return(
             
               <div key={index} className="py-4 border-b border-t text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4 ">

@@ -3,8 +3,7 @@ import { productModel } from "../models/productModel.js";
 // function for add Product
 export const addProduct = async (req, res) => {
   try {
-    console.log(req.body)
-    console.log(req.files)
+
     const {
       name,
       description,
@@ -49,12 +48,12 @@ export const addProduct = async (req, res) => {
       image:imageUrl,
       date:Date.now()
     });
-    console.log(product)
+
 
     res.status(200).json({success:true,message:"Product add successfully",product})
 
   } catch (error) {
-    console.log(error);
+
     res.json({
       success:false,
       message:error.message
@@ -71,7 +70,7 @@ export const listingProduct = async (req, res) => {
       product
     })
   } catch (error) {
-   console.log(error);
+
     res.json({
       success:false,
       message:error.message
@@ -101,7 +100,7 @@ const deletedProduct = await productModel.findOneAndDelete({ _id: id });
     message:"Product Remove Successfully"
   })
   try {
-  } catch (error) { console.log(error);
+  } catch (error) { 
     res.json({
       success:false,
       message:error.message
@@ -126,7 +125,7 @@ export const singleProduct = async (req, res) => {
   })
   try {
   } catch (error) {
-     console.log(error);
+ 
     res.json({
       success:false,
       message:error.message

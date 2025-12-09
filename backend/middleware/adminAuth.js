@@ -20,7 +20,7 @@ export const adminAuth = async (req, res, next) => {
 
     next();
   } catch (error) {
-    console.log("Admin Authenticaton Error:", error);
+   
     return res.status(400).json({
       suceess: false,
       message: error.message || "Not Authorized this resources Login again",

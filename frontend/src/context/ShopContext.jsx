@@ -38,7 +38,7 @@ const ShopContxtProvider = (props) => {
        
        
       } catch (error) {
-       console.log(error)
+  
         toast.error(error.response.data.message)
       }
     }
@@ -54,7 +54,7 @@ const ShopContxtProvider = (props) => {
             count += cartItems[items][item];
           }
         } catch (error) {
-          console.log("Error:",error)
+   toast.error(error.message)
         }
       }
     }
@@ -86,7 +86,7 @@ const getCartAmount = () =>{
 
         }
       } catch (error) {
-        console.log("error:",error)
+      toast.error(error.message)
       }
     }
   }
@@ -99,7 +99,7 @@ const getUserCard = async (token) => {
     const response = await axios.get(`${backendUrl}/api/cart/get`,{headers:{
       token:token
     }}) 
-    console.log(response)
+
     if(response.data.success){
       setcartItems(response.data.cartData)
     }
@@ -110,14 +110,14 @@ const getUserCard = async (token) => {
 }
 
 
-  const currency = "$";
+  const currency = "₹";
   const delivery_fee = 10;
 
 
   const getAllProduct = async () => {
     try {
       const response = await axios.get(`${backendUrl}/api/product/list`);
-      console.log(response)
+
       if(response.data.success){
         setProducts(response.data.product);
       }else{
@@ -136,7 +136,7 @@ useEffect(()=>{
   if(!token && localStorage.getItem('token')){
     setToken(localStorage.getItem('token'))
     getUserCard(localStorage.getItem('token'))
-    console.log(localStorage.getItem('token'))
+   
   }
 },[token])
 

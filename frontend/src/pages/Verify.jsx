@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react'
 import {shopContext} from "../context/ShopContext"
 import {  useSearchParams } from 'react-router-dom';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 const Verify = () => {
   const {token,navigate,setcartItems,backendUrl} = useContext(shopContext);
   const [searchParams] = useSearchParams();
@@ -24,7 +25,7 @@ const Verify = () => {
          navigate("/cart")
       }
     } catch (error) {
-      console.log(error)
+      toast.error(error.message)
     }
   }
 

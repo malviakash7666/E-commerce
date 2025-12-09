@@ -41,7 +41,7 @@ export const placeOrder = async (req, res) => {
       message: "Order placed",
     });
   } catch (error) {
-    console.log("order paced cod :", error);
+
     res.json({
       success: false,
       message: error.message,
@@ -156,7 +156,7 @@ export const placeOrderRazorpay = async (req, res) => {
 
     await razorpayInstance.orders.create(options,(error,order)=>{
       if(error){
-        console.log(error)
+  
         return res.json({success:false,message:error})
       }
       res.json({success:true,order});
@@ -164,7 +164,7 @@ export const placeOrderRazorpay = async (req, res) => {
 
   } catch (error)
    {
-    console.log("order paced razorpay :", error);
+   
     res.json({
       success: false,
       message: error.message,
@@ -177,11 +177,11 @@ export const verifyRazorpay = async (req,res) => {
   try {
     const {razorpay_order_id} = req.body;
     const userId = req.userId;
-    console.log(userId)
+
     const orderInfo = await razorpayInstance.orders.fetch(razorpay_order_id);
 
     if(orderInfo.status === "paid"){
-      console.log(orderInfo)
+    
       await Order.findByIdAndUpdate(orderInfo.receipt,{payment:true})
       await User.findByIdAndUpdate(userId,{cartData:{}})
       res.json({success:true,message:"Payment successfull"})
@@ -216,10 +216,10 @@ export const allOrderUser = async (req, res) => {
     const userId = req.userId;
 
     const orders = await Order.find({ userId });
-    console.log(orders);
+
     res.json({ sucess: true, orders });
   } catch (error) {
-    console.log("order paced cod :", error);
+
     res.json({
       success: false,
       message: error.message,

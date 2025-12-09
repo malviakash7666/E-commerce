@@ -34,7 +34,7 @@ function Add({token}) {
       image2 && formData.append('image2',image2)
       image3 && formData.append('image3',image3)
       image4 && formData.append('image4',image4)
-console.log(formData)
+
       const response = await axios.post(`${backendUrl}/api/product/add`,formData,{headers:{token},
       
       },)
@@ -54,7 +54,7 @@ console.log(formData)
   }
      
     } catch (error) {
-      console.log("Add product error:",error);
+
       toast.error(error.message)
     }
     

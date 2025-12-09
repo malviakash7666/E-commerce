@@ -19,12 +19,12 @@ function Orders({ token }) {
       );
       if (response.data.success) {
         setOrders(response.data.orders.reverse());
-        console.log(response);
+      
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
-      console.log(error);
+  toast.error(error.message)
     }
   };
   useEffect(() => {
@@ -34,7 +34,7 @@ function Orders({ token }) {
   const statusUpdate = async (event,orderId) => {
     try {
       const response = await axios.post(backendUrl+"/api/order/status",{orderId,status:event.target.value} ,{headers:{token}})
-      console.log(response)
+
       if(response.data.success){
        await featchOrders()
       }
