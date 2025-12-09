@@ -4,7 +4,7 @@ import Stripe from "stripe";
 
 import razorpay from "razorpay";
 // global variable
-const currency = "usd";
+const currency = "inr";
 const deliveryCharges = 10;
 // gatewave initilize
 const stripe = new Stripe(process.env.STRIP_SECRETE_KEY);
@@ -12,7 +12,7 @@ const stripe = new Stripe(process.env.STRIP_SECRETE_KEY);
 // razorpayInstance 
 
 const razorpayInstance = new razorpay({
-  key_id:process.env.RAZORPAY_API_ID,
+  key_id:process.env.VITE_RAZORPAY_API_ID,
   key_secret:process.env.RAZORPAY_SECRETE,
 })
 
