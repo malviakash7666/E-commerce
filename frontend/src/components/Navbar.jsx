@@ -41,6 +41,11 @@ const Navbar = () => {
         <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
         
         </NavLink> 
+    <NavLink to={"https://e-commerce-admin-phi-five.vercel.app"} className='flex flex-col items-center gap-1 ' >
+        <p>Admin</p>
+        <hr className="w-2/4 border-none h-[1.5px] bg-gray-700 hidden" />
+        
+        </NavLink> 
 </ul>
 <div className="flex items-center gap-6">
     <img onClick={()=>setShowSearch(true)} src={assets.search_icon} className='w-5 cursor-pointer' alt="" />
@@ -73,7 +78,8 @@ const Navbar = () => {
         <NavLink  onClick={()=>setVisible(false)}  to={"/"} className="py-2 pl-6 border">HOME</NavLink>
         <NavLink  onClick={()=>setVisible(false)} to={"/collection"} className="py-2 pl-6 border">COLLECTION</NavLink>
         <NavLink onClick={()=>setVisible(false)}  to={"/about"} className="py-2 pl-6 border">ABOUT</NavLink>
-        <NavLink onClick={()=>setVisible(false)}  to={"contact"} className="py-2 pl-6 border">CONTACT</NavLink>
+        <NavLink onClick={()=>setVisible(false)}  to={"/contact"} className="py-2 pl-6 border">CONTACT</NavLink>
+        <NavLink onClick={()=>setVisible(false)}  to={"https://e-commerce-admin-phi-five.vercel.app"} className="py-2 pl-6 border">Admin</NavLink>
     </div>
 </div>
     </div>
