@@ -1,30 +1,24 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { shopContext } from "../context/ShopContext";
-import { assets, product } from "../assets/frontend_assets/assets";
+import { assets } from "../assets/frontend_assets/assets";
 import RelatedProduct from "../components/RelatedProduct";
 import { FaUser } from "react-icons/fa";
 const Product = () => {
   const { productId } = useParams();
   const { products,currency,addToCard } = useContext(shopContext);
-  console.log(product)
+
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState("");
   const [size,setSize] = useState('');
   const fetchProduct = () => {
-   products.length > 0 ? products.map((item) => {
+   products.length > 0 && products.map((item) => {
       if (item._id === productId) {
         setProductData(item);
         setImage(item.image[0]);
         return null;
       }
-    }): product.map((item) => {
-      if (item._id === productId) {
-        setProductData(item);
-        setImage(item.image[0]);
-        return null;
-      }
-    });
+    })
   };
 
   useEffect(() => {

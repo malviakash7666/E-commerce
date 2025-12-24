@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { shopContext } from '../context/ShopContext'
 import Title from './Title'
 import ProductItem from './ProductItem';
-import {product} from "../assets/frontend_assets/assets"
+// import {product} from "../assets/frontend_assets/assets"
 const BestSeller = () => {
     const {products} = useContext(shopContext);
     
@@ -12,8 +12,6 @@ const BestSeller = () => {
         if(products.length>0){
  const bestProduct = products.filter((item)=>(item.bestSeller))
         setBestSeller(bestProduct.slice(0,5))
-        } else{
-            setBestSeller(product.filter(item=>(item.bestseller)))
         }
        
     },[products])

@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { shopContext } from "../context/ShopContext";
 import Title from "../components/Title";
-import { assets, product } from "../assets/frontend_assets/assets";
+import { assets } from "../assets/frontend_assets/assets";
 import CartTotal from "../components/CartTotal";
 import { FaCartPlus } from "react-icons/fa";
 
@@ -37,13 +37,11 @@ const Cart = () => {
         cartData.length>0  ?
         cartData.map((item, index) => {
           let productData 
-          if(products.length>0){
+      products
                 productData =  products.find(
             (product) => product._id === item._id
           )
-          }else{
-            productData = product.find((pro)=>pro._id === item._id)
-          }
+        
          
           
          

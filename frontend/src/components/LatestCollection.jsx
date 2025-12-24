@@ -3,20 +3,18 @@ import React, { useContext, useEffect, useState } from 'react'
 import Title from '../components/Title'
 import ProductItem from '../components/ProductItem'
 import { shopContext } from '../context/ShopContext'
-import { product } from '../assets/frontend_assets/assets'
+// import { product } from '../assets/frontend_assets/assets'
 
 const LatestCollection = () => {
   const {products} = useContext(shopContext)
-  console.log(product)
+  
   const [latestProduct, setLatestProduct] = useState([]);
 
   useEffect(() => {
    if(products.length>0){
-    setLatestProduct(product(0,10))
+    setLatestProduct(products(0,10))
    }
-   else{
-    setLatestProduct(product.slice(0,10))
-   }
+  
    
   
    
