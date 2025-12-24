@@ -3,7 +3,7 @@ import { shopContext } from '../context/ShopContext'
 import Title from '../components/Title'
 
 import ProductItem from '../components/ProductItem'
-import { product } from '../assets/frontend_assets/assets'
+// import { product } from '../assets/frontend_assets/assets'
 
 
 const RelatedProduct = ({category,subCategory}) => {
@@ -11,7 +11,9 @@ const RelatedProduct = ({category,subCategory}) => {
     const [related,setRelated] = useState([])
     useEffect(() => {
     
-        let productCopy =products.length>0? products.slice() : product.slice() ;
+        // let productCopy =products.length>0? products.slice() : product.slice() ;
+       let productCopy =products.slice();
+
         productCopy = productCopy.filter((item)=>category === item.category);
         productCopy = productCopy.filter((item)=>subCategory === item.subCategory)
         setRelated(productCopy.slice(0,5))
