@@ -2,15 +2,20 @@ import React, { useContext, useEffect, useState } from 'react'
 import { shopContext } from '../context/ShopContext'
 import Title from './Title'
 import ProductItem from './ProductItem';
-
+import {product} from "../assets/frontend_assets/assets"
 const BestSeller = () => {
     const {products} = useContext(shopContext);
     
     const [bestSeller, setBestSeller] = useState([])
 
     useEffect(()=>{
-        const bestProduct = products.filter((item)=>(item.bestSeller))
+        if(products.length>0){
+ const bestProduct = products.filter((item)=>(item.bestSeller))
         setBestSeller(bestProduct.slice(0,5))
+        } else{
+            setBestSeller(product.filter(item=>(item.bestseller)))
+        }
+       
     },[products])
      
   return (
@@ -18,7 +23,7 @@ const BestSeller = () => {
         <div className="text-center text-3xl py-8">
             <Title text1={"BEST"} text2={"SELLERS"} />
             <p className="w-3/4 mx-auto text-xs sm:text-base md:text-base text-gray-600 ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora, deleniti.</p>
+           Our best-selling products—trusted by customers for their quality, performance, and unbeatable value.</p>
 
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6">

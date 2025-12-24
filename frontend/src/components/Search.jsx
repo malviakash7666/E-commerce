@@ -12,7 +12,7 @@ const Search = () => {
     if(location.pathname.includes('collection')){
 setVisible(true)
     } else{
-      setVisible(false)
+      setVisible(false);
     }
 
     },[location])

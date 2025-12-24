@@ -18,7 +18,7 @@ const Hero = () => {
             </div>
             </div></div>
             {/* Hero right side  */}
-            <img src={assets.hero_img} className='w-full sm:w-1/2' alt="" />
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4ckOy90aPKSeAFRZ9ODHoCsgFctv2apaNvA&s" className='w-full sm:w-1/2' alt="" />
     </div>
   )
 }

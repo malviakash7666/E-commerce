@@ -3,13 +3,21 @@ import React, { useContext, useEffect, useState } from 'react'
 import Title from '../components/Title'
 import ProductItem from '../components/ProductItem'
 import { shopContext } from '../context/ShopContext'
+import { product } from '../assets/frontend_assets/assets'
 
 const LatestCollection = () => {
   const {products} = useContext(shopContext)
+  console.log(product)
   const [latestProduct, setLatestProduct] = useState([]);
 
   useEffect(() => {
-    setLatestProduct(products.slice(0,10))
+   if(products.length>0){
+    setLatestProduct(product(0,10))
+   }
+   else{
+    setLatestProduct(product.slice(0,10))
+   }
+   
   
    
   }, [products])
@@ -21,7 +29,7 @@ const LatestCollection = () => {
       <div className="text-center py-8 text-3xl">
         <Title text1={"LATEST"} text2={"COLLECTION"}  />
         <p className="w-3/4 m-auto text-xs sm:text-sm md:text-base text-gray-600">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus excepturi id debitis, veniam faceraut 
+        Explore our latest collection—new arrivals featuring modern designs, premium quality, and trending styles for today’s lifestyle.
         </p>
       </div>
       {/* Rendering Products  */}

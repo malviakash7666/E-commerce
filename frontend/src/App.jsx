@@ -16,7 +16,7 @@ import { ToastContainer} from 'react-toastify';
 import Verify from './pages/Verify'
 const App = () => {
   return (
-    <div className='px-10 sm:px[5vw] md:px-[7vw] lg:px[9vw]'>
+    <div className=' px-10 sm:px[5vw] md:px-[7vw] lg:px[9vw]'>
       <ToastContainer position='top-right' />
         <Navbar />
         <Search />

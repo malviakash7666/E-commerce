@@ -3,10 +3,11 @@ import { shopContext } from "../context/ShopContext";
 import Title from "../components/Title";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { FaCartPlus } from "react-icons/fa";
 
 
 const Orders = () => {
-  const { token, currency,backendUrl } = useContext(shopContext);
+  const { token, currency,backendUrl,navigate } = useContext(shopContext);
   
   const [orderData, setOrderData] = useState([]);
 
@@ -37,7 +38,7 @@ const Orders = () => {
         <Title text1={"MY"} text2={"ORDERS"} />
       </div>
       <div >
-        { 
+        { orderData.length >0 ?
           orderData.reverse().map((item,index)=>{ 
             const product = item.items?.[0]
          
@@ -66,7 +67,16 @@ const Orders = () => {
                 </div>
               </div>
             )
-          })
+          }) :(
+             <div className="flex w-full sm:w-[500px] gap-4 items-center h-44 mx flex-col">
+                  <FaCartPlus className="sm:w-[400px] sm:h-[400px] text-4xl" />
+                  <div className="w-full flex flex-col items-center justify-center gap-6">
+                    <h2>📦 No orders yet </h2>
+                    <p>Once you place an order, it will appear here.</p>
+                    <button className="cursor-pointer sm:w-77 bg-orange-500 hover:bg-orange-400 text-white px-5 rounded-xl py-2" onClick={()=>navigate("/collection")}> Browse Products</button>
+                    </div>
+                  </div>
+          )
         }
       </div>
     </div>

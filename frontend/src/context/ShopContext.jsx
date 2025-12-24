@@ -6,6 +6,7 @@ export const shopContext = createContext();
 import {useNavigate} from 'react-router-dom'
 import axios from "axios"
 const backendUrl = import.meta.env.VITE_BACKEND_URL;
+import {product} from "../assets/frontend_assets/assets"
 
 const ShopContxtProvider = (props) => {
   const [search, setSearch] = useState("");
@@ -101,7 +102,7 @@ const getUserCard = async (token) => {
     }}) 
 
     if(response.data.success){
-      setcartItems(response.data.cartData)
+      setcartItems(response.data.cartData )
     }
   } catch (error) {
     toast.error(error.response.data.message)
@@ -119,7 +120,7 @@ const getUserCard = async (token) => {
       const response = await axios.get(`${backendUrl}/api/product/list`);
 
       if(response.data.success){
-        setProducts(response.data.product);
+        setProducts(response.data.product || product);
       }else{
         toast.error(response.data.message)
       }

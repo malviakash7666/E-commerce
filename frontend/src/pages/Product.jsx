@@ -3,10 +3,11 @@ import { useParams } from "react-router-dom";
 import { shopContext } from "../context/ShopContext";
 import { assets, product } from "../assets/frontend_assets/assets";
 import RelatedProduct from "../components/RelatedProduct";
-
+import { FaUser } from "react-icons/fa";
 const Product = () => {
   const { productId } = useParams();
   const { products,currency,addToCard } = useContext(shopContext);
+  console.log(product)
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState("");
   const [size,setSize] = useState('');
@@ -84,15 +85,43 @@ const Product = () => {
         </div>
       </div>
       {/* Description and Review Section  */}
-      <div className="mt-20">
-        <div className="flex">
-          <b className="border px-5 py-3 text-sm">Description</b>
-          <p className="border px-5 py-3 text-sm ">Review(12)</p>
-        </div>
-<div className="flex flex-col gap-4 border px-6 text-sm text-gray-500">
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt minima modi, sit voluptate molestias aliquam doloribus amet. Eaque voluptate tempore tenetur aliquam ea mollitia qui, nesciunt, corporis debitis explicabo doloribus.</p>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores, magnam fugit cupiditate atque voluptas accusamus perspiciatis distinctio quas tenetur pariatur, optio maiores, inventore facilis neque odio beatae consequuntur porro tempora!</p>
+      <div className="flex sm:flex-row flex-col gap-3 justify-around mt-5 ">
+     <div>
+      <h1 className="sm:text-2xl text-balance">About This Product</h1>
+      <p>{productData.description.split(",").map((item,index)=>(
+        <span key={index}>💠{item.trim()}
+        <br />
+        </span>
+      ))}</p>
+     </div>
+     <div></div>
+     <div className="lex ">
+      <h1 className="sm:text-2xl text-balance">Top reviews from India</h1>
+      <div>
+        <div className="flex gap-2">
+<FaUser />
+<h1>Rohan</h1></div>
+<div className="flex sm:flex-row flex-col gap-4">
+  <div className="flex gap-1">
+   <img src={assets.star_icon} alt="" className="sm:w-3.5 w-0.5" />
+   <img src={assets.star_icon} alt="" className="w-3.5" />
+   <img src={assets.star_icon} alt="" className="w-3.5" />
+   <img src={assets.star_icon} alt="" className="w-3.5" />
+   </div>
+   <p className="font-bold"> Design and quality of material</p>
 </div>
+<div>
+  <p>Size:Xl</p>
+</div>
+<div><p>Love this lunch pot! Keeps my food hot for hours and no leaks at all. Perfect for work.</p></div>
+
+      </div>
+      
+     <button className="hover:bg-slate-200 border px-3 py-2 rounded-2xl  transition duration-200 mr-4 cursor-pointer">Helpful</button>
+     <button className="hover:bg-slate-200 border px-3 py-2 rounded-2xl  transition duration-200 mr-4 cursor-pointer">Report</button>
+     
+     </div>
+     
       </div>
          
          {/* Display Related Product  */}

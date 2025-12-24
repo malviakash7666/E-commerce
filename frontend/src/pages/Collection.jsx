@@ -3,15 +3,21 @@ import { shopContext } from "../context/ShopContext";
 import { assets } from "../assets/frontend_assets/assets";
 import Title from "../components/Title";
 import ProductItem from "../components/ProductItem";
-
+import { product } from "../assets/frontend_assets/assets";
 const Collection = () => {
   const { products,search,showSearch } = useContext(shopContext);
   const [showFilter, setShowFilter] = useState(false);
   const [filterProducts, setFilterProduct] = useState([]);
   const [sortType, setSortType] = useState("relevent");
   useEffect(() => {
-    setFilterProduct(products);
-    //
+    if(products.length>0){
+
+      setFilterProduct(products);
+    } else{
+      
+      setFilterProduct(product);
+    }
+    
   }, [products]);
   const [category, setCategory] = useState([]);
   const [subCategory, setsubCategory] = useState([]);
@@ -33,7 +39,7 @@ const Collection = () => {
     }
   };
   const applayFillter = () => {
-    let productCopy = products.slice();
+    let productCopy = products.length>0?products.slice(): product.slice();
    if(search && showSearch){
     productCopy = productCopy.filter(item=>item.name.toLowerCase().includes(search.toLowerCase()))
    }
@@ -51,7 +57,7 @@ const Collection = () => {
   };
   useEffect(() => {
     applayFillter();
-  }, [category, subCategory,search,showSearch,products]);
+  }, [category, subCategory,search,showSearch,products,product]);
 
   const sortProduct = () => {
     const copyFPro = filterProducts.slice();
