@@ -11,9 +11,16 @@ const LatestCollection = () => {
   const [latestProduct, setLatestProduct] = useState([]);
 
   useEffect(() => {
-    setLatestProduct(products(0,10));
-  }, [products]);
-
+   if(products.length>0){
+    setLatestProduct(products(0,10))
+   }
+  
+   
+  
+   
+  }, [products])
+  
+  
   return (
     <>
       <div className="my-10">
@@ -41,4 +48,4 @@ const LatestCollection = () => {
   );
 };
 
-export default LatestCollection;
+export default LatestCollection
