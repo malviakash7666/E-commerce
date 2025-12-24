@@ -12,7 +12,7 @@ const Product = () => {
   const [image, setImage] = useState("");
   const [size,setSize] = useState('');
   const fetchProduct = () => {
-   products.length > 0 && products.map((item) => {
+  products.map((item) => {
       if (item._id === productId) {
         setProductData(item);
         setImage(item.image[0]);
