@@ -11,9 +11,9 @@ const LatestCollection = () => {
   const [latestProduct, setLatestProduct] = useState([]);
 
   useEffect(() => {
-   if(products.length>0){
+
     setLatestProduct(products(0,10))
-   }
+   
   
    
   
