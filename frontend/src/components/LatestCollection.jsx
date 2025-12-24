@@ -11,14 +11,11 @@ const LatestCollection = () => {
   const [latestProduct, setLatestProduct] = useState([]);
 
   useEffect(() => {
-   if(products.length>0){
-    setLatestProduct(products(0,10))
-   }
-  
-   
-  
-   
-  }, [products])
+  if (!Array.isArray(products)) return;
+
+  setLatestProduct(products.slice(0, 10));
+}, [products]);
+
   
   
   return (
