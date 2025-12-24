@@ -19,11 +19,11 @@ setVisible(true)
   return showSearch  && visible  ? (
     <>
     <div className="border-t border-b bg-gray-50 text-center">
-        <div className="inline-flex items-center justify-center border border-gray-400 px-5 py-2 mx-3 my-5 rounded-full w-3/4 sm:w-1/2  ">
-        <input type="text" className='flex-1 outline-none bg-inherit text-sm' placeholder='Search' value={search} onChange={(e)=>setSearch(e.target.value)} name="" id="" />
-        <img src={assets.search_icon} className='w-4' alt="" />
+        <div className="inline-flex items-center justify-center border border-gray-400 px-5 py-2 mx-3 my-5 rounded-full  sm:w-1/2 w-fit  ">
+        <input type="text" className='flex-1 outline-none bg-inherit text-sm w-2.5' placeholder='Search' value={search} onChange={(e)=>setSearch(e.target.value)} name="" id="" />
+        <img src={assets.search_icon} className='sm:w-4 w-2' alt="" />
         </div> 
-        <img onClick={()=>setShowSearch(false)}  src={assets.cross_icon} className='inline w-3 cursor-pointer' alt="" />
+        <img onClick={()=>setShowSearch(false)}  src={assets.cross_icon} className='inline sm:w-3 w-1 cursor-pointer' alt="" />
     </div>
     
     </>
